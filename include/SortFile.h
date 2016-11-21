@@ -26,6 +26,7 @@ private:
 	fstream file, f;
 	size_t buffer, count_of_files, closed_files;
 	bool out;
+	string s_out;
 	vector<string> lines;
 	vector<string> file_names;
 	multimap<string, size_t> map;
