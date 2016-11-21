@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <iostream>
 #include "SortFile.h"
 #include <stdexcept>
@@ -13,40 +12,138 @@ auto new_file(std::string file_name, uint_fast64_t file_size) -> void
 	"Serebryakova", "Bushuev", "Fedorov", "Ionov", "Zinin" };
 	std::ofstream file;
 	file.open(file_name);
-	if (file.good()) {
-		while (file.tellp() < file_size) {
+	if (file.good()) 
+	{
+		while (file.tellp() < file_size) 
+		{
 			file << surnames[rand() % 11].data() << " "
 				<< names[rand() % 8].data() << " "
 				<< 1950 + rand() % 2016 << std::endl;
 		}
 		file.close();
 	}
-	else {
+	else
+	{
 		throw std::bad_exception();
 	}
 }
 
-SortFile::SortFile(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0)
+SortFile::~SortFile() 
 {
-	if (file.is_open())
+	file_names.clear();
+}
+
+SortFile::SortFile(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0) 
+{
+	if (file.is_open()) 
 	{
 		out = true;
-		sort();
+		division();
 	}
 };
-auto SortFile::sort()->void
+
+auto SortFile::make_file(string name_file)->void 
 {
+	file_names.push_back(name_file);
+	std::sort(lines.begin(), lines.end());
+	ofstream temp(name_file);
+	for (auto i : lines)
+	{
+		temp << i;
+		if (i != *(--lines.end())) temp << endl;
+	}
+	temp.close();
+	lines.clear();
+}
+
+auto SortFile::file_size(string name_file)->size_t 
+{
+	long fsize;
+	ifstream temp(name_file);
+	temp.seekg(0, ios::end);
+	fsize = temp.tellg();
+	temp.close();
+	return fsize;
+
+}
+
+auto SortFile::out_file(string line)->void 
+{
+	ofstream file("file.txt", ios::app);
+	file << line << endl;
+	file.close();
+
+}
+
+auto SortFile::remove_temp_files()->void 
+{
+	for (int i = 0; i < file_names.size(); ++i) 
+	{
+		if (remove(file_names[i].c_str()) == -1) 
+		{
+			throw;
+		}
+		else 
+		{
+			cout << "Gj";
+		}
+	}
+
+}
+
+
+
+
+auto SortFile::sort()->void 
+{
+	ifstream *streams = new ifstream[count_of_files];
+	string *top_line = new string[count_of_files];
+	for (int i = 0; i < count_of_files; ++i) 
+	{
+		streams[i].open(file_names[i]);
+		getline(streams[i], top_line[i]);
+		map.insert(pair<string,size_t>(top_line[i], i));
+	}
+
+	while (out) 
+	{
+		auto it = map.begin();
+		int n = (*it).second;
+		out_file((*it).first);
+		if (!streams[n].eof()) 
+		{
+			getline(streams[n], top_line[n]);
+			map.erase(map.begin());
+			map.insert(pair<string, size_t>(top_line[n], n));
+		}
+		else 
+		{
+			closed_files++;
+			streams[n].close();
+			map.erase(map.begin());
+			if (closed_files == count_of_files) { out = false; };
+
+		}
+	}
+	
+}
+
+
+auto SortFile::division()->void 
+{ 
 	string line_of_file;
 	size_t temp_size_files = 0;
-	while (!file.eof())
+	while (!file.eof()) 
 	{
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-		if (temp_size_files <= buffer)
+
+
+		if (temp_size_files <= buffer) 
 		{
 			lines.push_back(line_of_file);
 		}
-		else
+		else 
 		{
 			count_of_files++;
 			make_file(to_string(count_of_files) + ".txt");
@@ -55,104 +152,23 @@ auto SortFile::sort()->void
 		}
 	}
 	file.close();
-	if (lines.size())
+
+	if (lines.size()) 
 	{
 		count_of_files++;
 		make_file(to_string(count_of_files) + ".txt");
 	}
-	ifstream *files_streams = new ifstream[count_of_files];
-	for (size_t i = 0; i < count_of_files; ++i)
-	{
-		files_streams[i].open(file_names[i]);
-	}
-	string *top_line = new string[count_of_files];
-	for (size_t i = 0; i < count_of_files; ++i)
-	{
-		getline(files_streams[i], top_line[i]);
-		map.insert(pair<string, size_t>(top_line[i], i));
-	}
-	
-	file.close();
-	while (out)
-	{
-		auto it = map.begin();
-		out_file((*it).first);
-		size_t a = (*it).second;
-		map.erase(map.begin());
-		if (!files_streams[a].eof())
-		{
-			
-			getline(files_streams[a], top_line[a]);
-			map.insert(pair<string, size_t>(top_line[a], a));
-		}
-		else
-		{
-			
-			closed_files++;
-			if (closed_files == count_of_files) { out = false; };
-		}
-		
-	}
-	
-	for (int i = 0; i<count_of_files; ++i) files_streams[i].close();
-	remove_temp_files();
-};
-auto SortFile::make_file(string name_file)->void
-{
-	file_names.push_back(name_file);
-	std::sort(lines.begin(), lines.end());
-	ofstream temp(name_file);
-	if (!temp.is_open())
-		throw;
-	for (auto i : lines)
-	{
-		temp << i;
-		if (i != *(--lines.end()))
-			temp << endl;
-	}
-	temp.close();
-	lines.clear();
-}
-auto SortFile::file_size(string name_file)->size_t
-{
-	long fsize;
-	ifstream temp(name_file);
-	temp.seekg(0, ios::end);
-	fsize = temp.tellg();
-	temp.close();
-	return fsize;
-}
-auto SortFile::out_file(string line)->void
-{
-	ofstream file("out.txt", ios::app);
-	file << line << endl;
-	file.close();
-}
-SortFile::~SortFile() {
-	file_names.clear();
-}
 
-auto SortFile::remove_temp_files()->void
-{
-	for (int i = 0; i < file_names.size(); ++i)
-	{
-		if (remove(file_names[i].c_str()) == -1)
-		{
-			throw;
-		}
-		else
-		{
-			cout << "It's work";
-		}
-	}
-}
-int main()
+
+	sort();
+};
+/*int main()
 {
 	new_file("names.txt", 120);
 	SortFile obj("names.txt");
 	const int N = 256;
 	char S[N] = { "" };
-	ifstream in1("out.txt"); 
+	ifstream in1("abcd.txt"); 
 	while (!in1.eof()) 
 	{
 		in1.getline(S, N); 
@@ -161,5 +177,6 @@ int main()
 	in1.close();  
 	system("pause");
 	return 0;
-}
+}*/
 #endif
+
