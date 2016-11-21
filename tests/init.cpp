@@ -8,6 +8,7 @@ SCENARIO("sort", "[sort]")
 {
   SortFile obj("small.txt", 100, "file.txt");
  ifstream file("sort_small.txt");
+  ifstream out("file.txt");
  bool p=true;
  string s1,s2;
  while (!file.eof()&&!out.eof()){
