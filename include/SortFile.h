@@ -14,11 +14,11 @@ using namespace std;
 class SortFile
 {
 public:
-	SortFile(string name_main_file, size_t buffer, string name_out_file);
+	SortFile(string name_main_file, size_t buffer_, string name_out_file);
 	auto file_size(string name_file)->size_t;
 	auto make_file(string name_file)->void;
 	auto sort()->void;
-	auto out_file(string line, string name_out_file)->void;
+	auto out_file(string line)->void;
 	auto remove_temp_files()->void;
 	~SortFile();
 	auto division() -> void;
