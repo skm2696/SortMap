@@ -64,7 +64,6 @@ auto SortFile::file_size(string name_file)->size_t
 	fsize = temp.tellg();
 	temp.close();
 	return fsize;
-
 }
 
 auto SortFile::out_file(string line)->void 
@@ -121,7 +120,10 @@ auto SortFile::sort()->void
 			closed_files++;
 			streams[n].close();
 			map.erase(map.begin());
-			if (closed_files == count_of_files) { out = false; };
+			if (closed_files == count_of_files) 
+			{ 
+			out = false; 
+			};
 
 		}
 	}
@@ -137,8 +139,6 @@ auto SortFile::division()->void
 	{
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-
-
 		if (temp_size_files <= buffer) 
 		{
 			lines.push_back(line_of_file);
