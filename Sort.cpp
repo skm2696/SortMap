@@ -33,7 +33,7 @@ SortFile::~SortFile()
 	file_names.clear();
 }
 
-SortFile::SortFile(string name_main_file) :file(name_main_file), buffer(100), count_of_files(0), closed_files(0) 
+SortFile::SortFile(string name_main_file, size_t buffer, string name_out_file) :file(name_main_file), buffer_(buffer), count_of_files(0), closed_files(0) 
 {
 	if (file.is_open()) 
 	{
@@ -67,9 +67,9 @@ auto SortFile::file_size(string name_file)->size_t
 
 }
 
-auto SortFile::out_file(string line)->void 
+auto SortFile::out_file(string line, string name_out_file)->void 
 {
-	ofstream file("file.txt", ios::app);
+	ofstream file(name_out_file, ios::app);
 	file << line << endl;
 	file.close();
 
@@ -109,7 +109,7 @@ auto SortFile::sort()->void
 	{
 		auto it = map.begin();
 		int n = (*it).second;
-		out_file((*it).first);
+		out_file((*it).first, name_out_file);
 		if (!streams[n].eof()) 
 		{
 			getline(streams[n], top_line[n]);
