@@ -1,3 +1,9 @@
+#include "SortFile.cpp"
+#include <catch.hpp>
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
 SCENARIO("sort", "[sort]"){
   SortFile obj("small.txt", 512, "file.txt");
  ifstream file("sort_small.txt");
