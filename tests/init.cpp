@@ -4,8 +4,9 @@
 #include <string>
 #include <fstream>
 using namespace std;
-SCENARIO("sort", "[sort]"){
-  SortFile obj("small.txt", 512, "file.txt");
+SCENARIO("sort", "[sort]")
+{
+  SortFile obj("small.txt", 100, "file.txt");
  ifstream file("sort_small.txt");
  bool p=true;
  string s1,s2;
