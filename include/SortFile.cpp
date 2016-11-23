@@ -32,7 +32,7 @@ SortFile::~SortFile()
 {
 	file_names.clear();
 }
-SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) :file(name_main_file), buffer(buffer_), s_out(name_out_file), count_of_files(0), closed_files(0)
+SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) :file(name_main_file), buffer(buffer_*1024*1024), s_out(name_out_file), count_of_files(0), closed_files(0)
 {
 	if (file.is_open())
 	{
