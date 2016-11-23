@@ -5,16 +5,23 @@
 #include <iterator>
 #ifndef SORT_CPP
 #define SORT_CPP
+#include <iostream>
+#include "SortFile.h"
+#include <stdexcept>
+#include <map> 
+#include <iterator>
+#ifndef SORT_CPP
+#define SORT_CPP
 auto new_file(std::string file_name, uint_fast64_t file_size) -> void
 {
 	std::string names[] = { "Ivan", "Ann", "Ksusha", "Dima", "Kolya", "Anton", "Viktor", "Olga" };
 	std::string surnames[] = { "Ivanov", "Petrov", "Sidorov",	"Tarasenko", "Sudarev", "Dmitriev",
-	"Serebryakova", "Bushuev", "Fedorov", "Ionov", "Zinin" };
+		"Serebryakova", "Bushuev", "Fedorov", "Ionov", "Zinin" };
 	std::ofstream file;
 	file.open(file_name);
-	if (file.good()) 
+	if (file.good())
 	{
-		while (file.tellp() < file_size) 
+		while (file.tellp() < file_size)
 		{
 			file << surnames[rand() % 11].data() << " "
 				<< names[rand() % 8].data() << " "
@@ -27,36 +34,43 @@ auto new_file(std::string file_name, uint_fast64_t file_size) -> void
 		throw std::bad_exception();
 	}
 }
-
-SortFile::~SortFile() 
+SortFile::~SortFile()
 {
 	file_names.clear();
 }
-
-SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) :file(name_main_file), buffer(buffer_), s_out(name_out_file), count_of_files(0), closed_files(0) 
+SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) :file(name_main_file), buffer(buffer_), s_out(name_out_file), count_of_files(0), closed_files(0)
 {
-	if (file.is_open()) 
+	if (file.is_open())
 	{
 		out = true;
 		division();
 	}
-};
-
-auto SortFile::make_file(string name_file)->void 
+}
+auto SortFile::make_file(string name_file)->void
 {
-	file_names.push_back(name_file);
-	std::sort(lines.begin(), lines.end());
+	file_names.push_back(name_file); 
+	Compare comp;
+
+	std::sort(lines.begin(), lines.end(), comp);
 	ofstream temp(name_file);
-	for (auto i : lines)
+	/*for (auto i : lines)
 	{
 		temp << i;
 		if (i != *(--lines.end())) temp << endl;
+	}*/
+	for (size_t i = 0; i < lines.size(); i++)
+	{
+		if (i == lines.size() - 1)
+		{
+			temp << lines[i];
+			continue;
+		}
+		temp << lines[i] << endl;
 	}
 	temp.close();
 	lines.clear();
 }
-
-auto SortFile::file_size(string name_file)->size_t 
+auto SortFile::file_size(string name_file)->size_t
 {
 	long fsize;
 	ifstream temp(name_file);
@@ -65,85 +79,78 @@ auto SortFile::file_size(string name_file)->size_t
 	temp.close();
 	return fsize;
 }
-
-auto SortFile::out_file(string line)->void 
+auto SortFile::out_file(string line)->void
 {
 	ofstream file(s_out, ios::app);
 	file << line << endl;
 	file.close();
 
 }
-
-auto SortFile::remove_temp_files()->void 
+auto SortFile::remove_temp_files()->void
 {
-	for (int i = 0; i < file_names.size(); ++i) 
+	for (int i = 0; i < file_names.size(); ++i)
 	{
-		if (remove(file_names[i].c_str()) == -1) 
+		if (remove(file_names[i].c_str()) == -1)
 		{
 			throw;
 		}
-		else 
+		else
 		{
 			cout << "Gj";
 		}
 	}
 
 }
-
-
-
-
-auto SortFile::sort()->void 
+auto SortFile::sort()->void
 {
 	ifstream *streams = new ifstream[count_of_files];
 	string *top_line = new string[count_of_files];
-	for (int i = 0; i < count_of_files; ++i) 
+	for (int i = 0; i < count_of_files; ++i)
 	{
 		streams[i].open(file_names[i]);
 		getline(streams[i], top_line[i]);
-		map.insert(pair<string,size_t>(top_line[i], i));
+		map.insert(pair<string, size_t>(top_line[i], i));
 	}
 
-	while (out) 
+	while (out)
 	{
 		auto it = map.begin();
 		int n = (*it).second;
 		out_file((*it).first);
-		if (!streams[n].eof()) 
+		if (!streams[n].eof())
 		{
 			getline(streams[n], top_line[n]);
 			map.erase(map.begin());
 			map.insert(pair<string, size_t>(top_line[n], n));
 		}
-		else 
+		else
 		{
 			closed_files++;
 			streams[n].close();
 			map.erase(map.begin());
-			if (closed_files == count_of_files) 
-			{ 
-			out = false; 
+			if (closed_files == count_of_files)
+			{
+				out = false;
 			};
 
 		}
 	}
-	
+
 }
 
-
-auto SortFile::division()->void 
-{ 
+auto SortFile::division()->void
+{
 	string line_of_file;
 	size_t temp_size_files = 0;
-	while (!file.eof()) 
+	while (!file.eof())
 	{
 		getline(file, line_of_file);
 		temp_size_files += line_of_file.size();
-		if (temp_size_files <= buffer) 
+		if (temp_size_files <= buffer)
 		{
 			lines.push_back(line_of_file);
 		}
-		else 
+		else
 		{
 			count_of_files++;
 			make_file(to_string(count_of_files) + ".txt");
@@ -153,7 +160,7 @@ auto SortFile::division()->void
 	}
 	file.close();
 
-	if (lines.size()) 
+	if (lines.size())
 	{
 		count_of_files++;
 		make_file(to_string(count_of_files) + ".txt");
