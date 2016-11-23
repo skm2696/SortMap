@@ -23,7 +23,7 @@ struct Compare
 				return (str_to_vec(str1)[0] < str_to_vec(str2)[0]);
 			else
 			return (str_to_vec(str1)[2] < str_to_vec(str2)[2]);
-		return (str_to_vec(str1)[1] < str_to_vec(str2)[1])
+		return (str_to_vec(str1)[1] < str_to_vec(str2)[1]);
 	}
 };
 class SortFile
