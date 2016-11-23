@@ -1,10 +1,4 @@
-#include <iostream>
-#include "SortFile.h"
-#include <stdexcept>
-#include <map> 
-#include <iterator>
-#ifndef SORT_CPP
-#define SORT_CPP
+
 #include <iostream>
 #include "SortFile.h"
 #include <stdexcept>
