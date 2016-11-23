@@ -11,32 +11,7 @@
 #include <algorithm>
 #include <cstdio>
 using namespace std;
-auto str_to_vec(string str) -> vector<string>
-{
-	std::vector<string> buf;
-	if (str == "")
-		return buf;
-	size_t k = 0;
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (str[i] == ' ')
-		{
-			if (str[k] != ' ')
-			{
-				buf.push_back(str.substr(k, i - k));
-			}
-
-			k = i + 1;
-			continue;
-		}
-		if (i == str.length() - 1)
-		{
-			buf.push_back(str.substr(k, i - k + 1));
-
-		}
-	}
-	return buf;
-}
+auto str_to_vec(string str) -> vector<string>;
 struct Compare
 {
 	bool operator() (string str1, string str2)
