@@ -1,18 +1,16 @@
+
 White Carl 2745
 Kennedy Daryl 3408
 White Daryl 3032
-Black Rick 2242
 Holmes James 1991
-Holmes Rick 3365
-
 McCormick James 3055
-Petrov Mike 2242
-Sparrow Rick 3348
-Watson Rick 2442
-
-
 White James 2441
 White James 3425
+Petrov Mike 2242
 White Mike 2222
+Black Rick 2242
+Holmes Rick 3365
+Sparrow Rick 3348
+Watson Rick 2442
 White Rick 2522
 White Sam 3780
