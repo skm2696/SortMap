@@ -69,15 +69,14 @@ auto SortFile::make_file(string name_file)->void
 {
 	file_names.push_back(name_file); 
 	Compare comp;
-
 	std::sort(lines.begin(), lines.end(), comp);
 	ofstream temp(name_file);
-	/*for (auto i : lines)
+	for (auto i : lines)
 	{
 		temp << i;
 		if (i != *(--lines.end())) temp << endl;
-	}*/
-	for (size_t i = 0; i < lines.size(); i++)
+	}
+	/*for (size_t i = 0; i < lines.size(); i++)
 	{
 		if (i == lines.size() - 1)
 		{
@@ -85,7 +84,7 @@ auto SortFile::make_file(string name_file)->void
 			continue;
 		}
 		temp << lines[i] << endl;
-	}
+	}*/
 	temp.close();
 	lines.clear();
 }
