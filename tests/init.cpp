@@ -14,7 +14,7 @@ ifstream file("sort_small.txt");
  while (!file.eof()&&!out.eof()){
  getline(file,s1);
   getline(out,s2);
-  if (s1!=s2||s1==""){
+  if (s1!=s2 && s1!=""){
   p=false;
    break;
   }
