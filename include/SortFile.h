@@ -14,7 +14,7 @@ using namespace std;
 auto str_to_vec(string str) -> vector<string>;
 struct Compare
 {
-	bool operator() (string str1, string str2)
+	bool operator() (string str1, string str2) const
 	{
 		if (str1 == "" || str2 == "")
 			return false;
