@@ -17,6 +17,12 @@ ifstream file("sort_small.txt");
   if (s1==s2 || s1==""||s2==""){
   p=true;
   }
+   else
+   {
+     p==false;
+     break;
+   }
+ 
  }
   file.close();
   out.close();
