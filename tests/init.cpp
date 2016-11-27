@@ -6,15 +6,15 @@
 using namespace std;
 SCENARIO("sort", "[sort]")
 {
-  SortFile obj("test.txt", 1, "f.txt");
-ifstream file("s_test.txt");
-  ifstream out("f.txt");
+  SortFile obj("sort.txt", 1, "fl.txt");
+ifstream file("sort_small.txt");
+  ifstream out("fl.txt");
  bool p=true;
  string s1,s2;
  while (!file.eof()&&!out.eof()){
  getline(file,s1);
   getline(out,s2);
-  if (s1!=s2){
+  if (s1!=s2||s1==""){
   p=false;
    break;
   }
