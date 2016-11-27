@@ -6,9 +6,9 @@
 using namespace std;
 SCENARIO("sort", "[sort]")
 {
-  SortFile obj("small.txt", 1, "file.txt");
-ifstream file("sort_small.txt");
-  ifstream out("file.txt");
+  SortFile obj("test.txt", 1, "f.txt");
+ifstream file("s_test.txt");
+  ifstream out("f.txt");
  bool p=true;
  string s1,s2;
  while (!file.eof()&&!out.eof()){
