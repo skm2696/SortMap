@@ -27,7 +27,6 @@ auto str_to_vec(string str) -> vector<string>
 		if (i == str.length() - 1)
 		{
 			buf.push_back(str.substr(k, i - k + 1));
-
 		}
 	}
 	return buf;
