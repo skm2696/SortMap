@@ -28,7 +28,7 @@ ifstream file("sort_small.txt");
   out.close();
   REQUIRE(p==true);
 }
-SCENARIO("sort", "[sort]")
+SCENARIO("sort2", "[sort2]")
 {
   SortFile obj("15.txt", 1, "sort_15.txt");
 ifstream file("sort_small.txt");
