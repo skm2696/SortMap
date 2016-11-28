@@ -37,7 +37,6 @@ public:
 	auto remove_temp_files()->void;
 	~SortFile();
 	auto division() -> void;
-
 private:
 	fstream file, f;
 	size_t buffer, count_of_files, closed_files;
