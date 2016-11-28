@@ -53,11 +53,11 @@ ifstream file("sort_15.txt");
   REQUIRE(p==true);
 }*/
 
-SCENARIO("sort3", "[sort3]")
+SCENARIO("sort", "[sort]")
 {
-  SortFile obj("32.txt", 17, "fl3.txt");
+  SortFile obj("32.txt", 17, "fl4.txt");
 ifstream file("sort_32.txt");
-  ifstream out("fl3.txt");
+  ifstream out("fl4.txt");
  bool p=true;
  string s1,s2;
  long int i=0;
