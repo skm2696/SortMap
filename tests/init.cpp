@@ -28,3 +28,34 @@ ifstream file("sort_small.txt");
   out.close();
   REQUIRE(p==true);
 }
+SCENARIO("file - 15 mb, memory - 4 mb", "[15 - 4]") {
+	auto begin = std::chrono::high_resolution_clock::now();
+	external_sort("15.txt", 4 * 1024 * 1024,"sorted15.txt");
+	auto end = std::chrono::high_resolution_clock::now();
+	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+	
+
+	std::ifstream output_first("sorted15"), output_second("sorted15");
+	data first, second;
+	bool flag = true;
+	bool check = false;
+	output_second >> first.last_name >> first.first_name >> first.year;
+	while (output_second) {
+		output_first >> first.last_name >> first.first_name >> first.year;
+		output_second >> second.last_name >> second.first_name >> second.year;
+		if (!output_second) { 
+			check = true;
+			break;
+		}
+		if (!(first <= second)) {
+			output_first.close();
+			output_second.close();
+			flag = false;
+			break;
+		}
+	}
+
+	REQUIRE(flag);
+	REQUIRE(check);
+	REQUIRE(res);
+}
