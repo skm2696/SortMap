@@ -135,11 +135,7 @@ auto SortFile::sort()->void
 			closed_files++;
 			streams[n].close();
 			map.erase(map.begin());
-			if (closed_files == count_of_files)
-			{
-				out = false;
-			};
-
+	
 		}
 	}
 
