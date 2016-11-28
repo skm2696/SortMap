@@ -19,7 +19,7 @@ ifstream file("sort_small.txt");
   }
    else
    {
-     p==false;
+     p=false;
      break;
    }
  
@@ -43,7 +43,7 @@ ifstream file("sort_15.txt");
   }
    else
    {
-     p==false;
+     p=false;
      break;
    }
  
