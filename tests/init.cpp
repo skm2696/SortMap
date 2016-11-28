@@ -9,7 +9,7 @@ SCENARIO("sort", "[sort]")
   SortFile obj("sort.txt", 1, "fl.txt");
 //ifstream file("sort_small.txt");
  // ifstream out("fl.txt");
- bool p=екгу;
+ bool p=true;
  //string s1,s2;
  //while (!file.eof()&&!out.eof()){
 // getline(file,s1);
@@ -33,7 +33,7 @@ SCENARIO("sort2", "[sort2]")
   SortFile obj("15.txt", 4, "fl2.txt");
 //ifstream file2("sort_15.txt");
  // ifstream out2("fl2.txt");
- bool p=екгу;
+ bool p=true;
 // string s1,s2;
 //// while (!file2.eof()&&!out2.eof()){
 // getline(file2,s1);
