@@ -61,7 +61,6 @@ SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) 
 {
 	if (file.is_open())
 	{
-		out = true;
 		division();
 	}
 }
@@ -75,15 +74,6 @@ auto SortFile::make_file(string name_file)->void
 	{
 		temp << i << endl;
 	}
-	/*for (size_t i = 0; i < lines.size(); i++)
-	{
-		if (i == lines.size() - 1)
-		{
-			temp << lines[i];
-			continue;
-		}
-		temp << lines[i] << endl;
-	}*/
 	temp.close();
 	lines.clear();
 }
@@ -129,7 +119,7 @@ auto SortFile::sort()->void
 		map.insert(pair<string, size_t>(top_line[i], i));
 	}
 
-	while (out)
+	while (!map.empty())
 	{
 		auto it = map.begin();
 		int n = (*it).second;
