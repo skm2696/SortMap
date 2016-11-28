@@ -30,7 +30,7 @@ ifstream file("sort_small.txt");
 }
 SCENARIO("sort2", "[sort2]")
 {
-  SortFile obj("15.txt", 1, "fl2.txt");
+  SortFile obj("15.txt", 4, "fl2.txt");
 ifstream file("sort_15.txt");
   ifstream out("fl2.txt");
  bool p=false;
@@ -55,20 +55,23 @@ ifstream file("sort_15.txt");
 using namespace std;
 SCENARIO("sort3", "[sort3]")
 {
-  SortFile obj("32.txt", 1, "fl3.txt");
+  SortFile obj("32.txt", 17, "fl3.txt");
 ifstream file("sort_32.txt");
   ifstream out("fl3.txt");
  bool p=false;
  string s1,s2;
+ long int i=0;
  while (!file.eof()&&!out.eof()){
  getline(file,s1);
   getline(out,s2);
+   i++;
   if (s1==s2 || s1==""||s2==""){
   p=true;
   }
    else
    {
      p=false;
+     cout<<i;
      break;
    }
  
