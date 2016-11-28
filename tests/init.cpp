@@ -74,8 +74,9 @@ ifstream file("sort_32.txt");
  
  
  }
+ }
   file.close();
   out.close();
   REQUIRE(p==true);
-}
+
 }
