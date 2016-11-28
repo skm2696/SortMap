@@ -58,22 +58,26 @@ SCENARIO("sort", "[sort]")
   SortFile obj("32.txt", 17, "fl4.txt");
 ifstream file("sort_32.txt");
   ifstream out("fl4.txt");
- bool p=true;
+ bool p=false;
  string s1,s2;
  long int i=0;
  while (!file.eof()&&!out.eof()){
  getline(file,s1);
   getline(out,s2);
    i++;
-  if (s1!=s2)
+  if (s1==s2 || s1==""|| s2=="")
   {
  
-     p=false;
-     cout<<i;
-     break;
+     p=true;
+     
  
  
  }
+else
+{
+p=false;
+break;
+}
  }
   file.close();
   out.close();
