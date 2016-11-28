@@ -73,8 +73,7 @@ auto SortFile::make_file(string name_file)->void
 	ofstream temp(name_file);
 	for (auto i : lines)
 	{
-		temp << i;
-		if (i != *(--lines.end())) temp << endl;
+		temp << i << endl;
 	}
 	/*for (size_t i = 0; i < lines.size(); i++)
 	{
