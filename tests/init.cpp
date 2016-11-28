@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 using namespace std;
-/*SCENARIO("sort", "[sort]")
+SCENARIO("sort", "[sort]")
 {
   SortFile obj("sort.txt", 1, "fl.txt");
 ifstream file("sort_small.txt");
@@ -51,9 +51,9 @@ ifstream file("sort_15.txt");
   file.close();
   out.close();
   REQUIRE(p==true);
-}*/
+}
 
-SCENARIO("sort", "[sort]")
+SCENARIO("sort3", "[sort3]")
 {
   SortFile obj("32.txt", 17, "fl4.txt");
 ifstream file("sort_32.txt");
@@ -73,12 +73,6 @@ ifstream file("sort_32.txt");
  
  
  }
-else
-{
-p=false;
-cout << i;
-break;
-}
  }
   file.close();
   out.close();
