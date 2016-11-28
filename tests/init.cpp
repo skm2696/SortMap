@@ -65,7 +65,8 @@ ifstream file("sort_32.txt");
  getline(file,s1);
   getline(out,s2);
    i++;
-  if (s1!=s2){
+  if (s1!=s2)
+  {
  
      p=false;
      cout<<i;
@@ -76,4 +77,5 @@ ifstream file("sort_32.txt");
   file.close();
   out.close();
   REQUIRE(p==true);
+}
 }
