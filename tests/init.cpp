@@ -52,3 +52,28 @@ ifstream file("sort_15.txt");
   out.close();
   REQUIRE(p==true);
 }
+using namespace std;
+SCENARIO("sort3", "[sort3]")
+{
+  SortFile obj("32.txt", 1, "fl3.txt");
+ifstream file("sort_32.txt");
+  ifstream out("fl3.txt");
+ bool p=false;
+ string s1,s2;
+ while (!file.eof()&&!out.eof()){
+ getline(file,s1);
+  getline(out,s2);
+  if (s1==s2 || s1==""||s2==""){
+  p=true;
+  }
+   else
+   {
+     p=false;
+     break;
+   }
+ 
+ }
+  file.close();
+  out.close();
+  REQUIRE(p==true);
+}
