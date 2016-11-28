@@ -31,7 +31,7 @@ ifstream file("sort_small.txt");
 SCENARIO("sort2", "[sort2]")
 {
   SortFile obj("15.txt", 1, "sort_15.txt");
-ifstream file("sort_small.txt");
+ifstream file("sort_15.txt");
   ifstream out("fl.txt");
  bool p=false;
  string s1,s2;
