@@ -30,7 +30,7 @@ ifstream file("sort_small.txt");
 }
 SCENARIO("file - 15 mb, memory - 4 mb", "[15 - 4]") {
 	auto begin = std::chrono::high_resolution_clock::now();
-	external_sort("15.txt", 4 * 1024 * 1024,"sorted15.txt");
+	SortFile("15.txt", 4 * 1024 * 1024,"sorted15.txt");
 	auto end = std::chrono::high_resolution_clock::now();
 	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
 	
