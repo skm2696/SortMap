@@ -18,11 +18,11 @@ struct Compare
 	{
 		if (str1 == "" || str2 == "")
 			return false;
-		//if (str_to_vec(str1)[1] == str_to_vec(str2)[1])
-			//if (str_to_vec(str1)[0] != str_to_vec(str2)[0])
-				//return (str_to_vec(str1)[0] < str_to_vec(str2)[0]);
-			//else
-			//return (str_to_vec(str1)[2] < str_to_vec(str2)[2]);
+		if (str_to_vec(str1)[1] == str_to_vec(str2)[1])
+			if (str_to_vec(str1)[0] != str_to_vec(str2)[0])
+				return (str_to_vec(str1)[0] < str_to_vec(str2)[0]);
+			else
+			return (str_to_vec(str1)[2] < str_to_vec(str2)[2]);
 		return (str_to_vec(str1)[1] < str_to_vec(str2)[1]);
 	}
 };
@@ -41,7 +41,7 @@ private:
 	fstream file, f;
 	size_t buffer, count_of_files, closed_files;
 	string s_out;
-	vector<string> lines;
+	multiset<string, Compare> lines;
 	vector<string> file_names;
 	multimap<string, size_t, Compare> map;
 };
