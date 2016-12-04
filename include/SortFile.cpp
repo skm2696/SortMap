@@ -67,8 +67,6 @@ SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) 
 auto SortFile::make_file(string name_file)->void
 {
 	file_names.push_back(name_file); 
-	Compare comp;
-	std::sort(lines.begin(), lines.end(), comp);
 	ofstream temp(name_file);
 	for (auto i : lines)
 	{
@@ -103,7 +101,7 @@ auto SortFile::remove_temp_files()->void
 		}
 		else
 		{
-			cout << "Gj";
+			cout << "Good";
 		}
 	}
 
@@ -151,13 +149,13 @@ auto SortFile::division()->void
 		temp_size_files += line_of_file.size();
 		if (temp_size_files <= buffer)
 		{
-			lines.push_back(line_of_file);
+			lines.emplace(line_of_file);
 		}
 		else
 		{
 			count_of_files++;
 			make_file(to_string(count_of_files) + ".txt");
-			lines.push_back(line_of_file);
+			lines.emplace(line_of_file);
 			temp_size_files = line_of_file.size();
 		}
 	}
