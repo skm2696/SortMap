@@ -12,67 +12,52 @@
 #include <algorithm>
 #include <cstdio>
 using namespace std;
-class full_name
-{
-public:
-	string name;
-	string surname;
-	string date;
-	full_name(string current_str);
-	friend bool operator<(const full_name& a, const full_name& b)
+
+struct full_name {
+	string surname, name;
+	short date;
+	size_t size() const
 	{
-		if (a.name == "" || b.name == "")
-			return false;
-		return a.name < b.name;
+		return (surname.capacity() + name.capacity() + sizeof(date) + 2 * sizeof(" "));
 	}
-	
 };
 
-full_name::full_name(string current_str)
+bool operator <(const full_name& s1, const full_name& s2)
 {
-	if (current_str != "")
-	{
-		size_t k = 0;
-		size_t i = 0;
-
-		while (current_str[i] != ' ')
-			++i;
-
-		surname = current_str.substr(k, i - k);
-		k = i + 1;
-		++i;
-		while (current_str[i] != ' ')
-			++i;
-
-		name = current_str.substr(k, i - k);
-		date = current_str.substr(i + 1, current_str.length() - i - 1);
-	}
-	else
-	{
-		surname = "";
-		name = "";
-		date = "";
-	}
+	return (s1.name < s2.name);
 }
 
-class SortFile
+bool operator >(const full_name& s1, const full_name& s2)
 {
+	return (s1.name > s2.name);
+}
+
+istream & operator >> (istream & in, full_name& s)
+{
+	in >> s.surname >> s.name >> s.date;
+	return in;
+}
+ostream & operator<<(ostream & out, full_name const & s)
+{
+	out << s.surname << " " << s.name << " " << s.date << endl;
+	return out;
+}
+
+class SortFile {
 public:
-	SortFile(string name_main_file, size_t buffer_, string name_out_file);
-	auto file_size(string name_file)->size_t;
+	SortFile(string name_main_file, size_t buff_size, string out_file);
+	auto division()->void;
 	auto make_file(string name_file)->void;
 	auto sort()->void;
-	auto out_file(full_name line)->void;
-	auto remove_temp_files()->void;
 	~SortFile();
-	auto division() -> void;
 private:
-	fstream file, f;
-	size_t buffer, count_of_files, closed_files;
-	string s_out;
-	multiset<full_name> lines;
+	string s_out, s_in;
+	size_t count_of_files;
 	vector<string> file_names;
+	vector<full_name> line;
+	uint_fast64_t buffer;
 	multimap<full_name, size_t> map;
+
 };
 
 #include "SortFile.cpp"
