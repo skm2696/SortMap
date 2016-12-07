@@ -28,7 +28,7 @@ SCENARIO("sort", "[sort]")
  // out.close();
   REQUIRE(p==true);
 }
-SCENARIO("sort2", "[sort2]")
+/*SCENARIO("sort2", "[sort2]")
 {
   SortFile obj("15.txt", 4, "fl2.txt");
 //ifstream file2("sort_15.txt");
@@ -78,4 +78,4 @@ SCENARIO("sort3", "[sort3]")
  // out3.close();
   REQUIRE(p==true);
 
-}
+}*/
