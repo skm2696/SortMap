@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <chrono>
 using namespace std;
 SCENARIO("sort", "[sort]")
 {
