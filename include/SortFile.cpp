@@ -22,7 +22,7 @@ auto SortFile::make_file(string name_file)->void
 	ofstream temp(name_file);
 	for (auto i : lines)
 	{
-		temp<< i << endl;
+		temp << i.surname+' '+i.name+' '+i.date << endl;
 	}
 	temp.close();
 	lines.clear();
@@ -39,7 +39,7 @@ auto SortFile::file_size(string name_file)->size_t
 auto SortFile::out_file(full_name line)->void
 {
 	ofstream file(s_out, ios::app);
-	file << line << endl;
+	file << line.surname+' '+line.name+' '+line.date << endl;
 	file.close();
 
 }
