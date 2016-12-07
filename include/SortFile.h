@@ -14,11 +14,10 @@
 using namespace std;
 class full_name
 {
+public:
 	string name;
 	string surname;
 	string date;
-
-public:
 	full_name(string current_str);
 	friend bool operator<(const full_name& a, const full_name& b)
 	{
@@ -27,10 +26,6 @@ public:
 		return a.name < b.name;
 	}
 	
-	friend fstream & operator<< (ofstream &fout, full_name &a)
-	{
-		fout << surname + ' ' + name + ' ' + date << endl;
-	}
 };
 
 full_name::full_name(string current_str)
