@@ -33,9 +33,12 @@ SCENARIO("sort", "[sort]")
  // out.close();
   REQUIRE(p==true);
 }
-/*SCENARIO("sort2", "[sort2]")
+SCENARIO("sort2", "[sort2]")
 {
-  SortFile obj("15.txt", 4, "fl2.txt");
+	auto begin = std::chrono::high_resolution_clock::now();
+	SortFile obj("15.txt", 4, "fl2.txt");
+	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+	std::cout << "15 mb time: " << res << std::endl;
 //ifstream file2("sort_15.txt");
  // ifstream out2("fl2.txt");
  bool p=true;
@@ -60,7 +63,10 @@ SCENARIO("sort", "[sort]")
 
 SCENARIO("sort3", "[sort3]")
 {
-  SortFile obj("32.txt", 17, "fl4.txt");
+	auto begin = std::chrono::high_resolution_clock::now();
+	SortFile obj("32.txt", 17, "fl4.txt");
+	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+	std::cout << "32 mb time: " << res << std::endl;
 //ifstream file3("sort_32.txt");
  // ifstream out3("fl4.txt");
  bool p=true;
@@ -83,4 +89,4 @@ SCENARIO("sort3", "[sort3]")
  // out3.close();
   REQUIRE(p==true);
 
-}*/
+}
