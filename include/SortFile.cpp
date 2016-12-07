@@ -5,53 +5,6 @@
 #ifndef SORT_CPP
 #define SORT_CPP
 
-auto str_to_vec(string str) -> vector<string>
-{
-	std::vector<string> buf;
-	if (str == "")
-		return buf;
-	size_t k = 0;
-	for (size_t i = 0; i < str.length(); i++)
-	{
-		if (str[i] == ' ')
-		{
-			if (str[k] != ' ')
-			{
-				buf.push_back(str.substr(k, i - k));
-			}
-
-			k = i + 1;
-			continue;
-		}
-		if (i == str.length() - 1)
-		{
-			buf.push_back(str.substr(k, i - k + 1));
-		}
-	}
-	return buf;
-}
-auto new_file(std::string file_name, uint_fast64_t file_size) -> void
-{
-	std::string names[] = { "Ivan", "Ann", "Ksusha", "Dima", "Kolya", "Anton", "Viktor", "Olga" };
-	std::string surnames[] = { "Ivanov", "Petrov", "Sidorov",	"Tarasenko", "Sudarev", "Dmitriev",
-		"Serebryakova", "Bushuev", "Fedorov", "Ionov", "Zinin" };
-	std::ofstream file;
-	file.open(file_name);
-	if (file.good())
-	{
-		while (file.tellp() < file_size)
-		{
-			file << surnames[rand() % 11].data() << " "
-				<< names[rand() % 8].data() << " "
-				<< 1950 + rand() % 2016 << std::endl;
-		}
-		file.close();
-	}
-	else
-	{
-		throw std::bad_exception();
-	}
-}
 SortFile::~SortFile()
 {
 	file_names.clear();
@@ -69,7 +22,7 @@ auto SortFile::make_file(string name_file)->void
 	ofstream temp(name_file);
 	for (auto i : lines)
 	{
-		i.push_to(temp);
+		temp<< i << endl;
 	}
 	temp.close();
 	lines.clear();
@@ -86,7 +39,7 @@ auto SortFile::file_size(string name_file)->size_t
 auto SortFile::out_file(full_name line)->void
 {
 	ofstream file(s_out, ios::app);
-	line.push_to(file);
+	file << line << endl;
 	file.close();
 
 }
