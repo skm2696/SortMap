@@ -12,21 +12,54 @@
 #include <algorithm>
 #include <cstdio>
 using namespace std;
-auto str_to_vec(string str) -> vector<string>;
-struct Compare
+class full_name
 {
-	bool operator() (string str1, string str2) const
+	string name;
+	string surname;
+	string date;
+
+public:
+	full_name(string current_str);
+	friend bool operator<(const full_name& a, const full_name& b)
 	{
-		if (str1 == "" || str2 == "")
+		if (a.name == "" || b.name == "")
 			return false;
-		if (str_to_vec(str1)[1] == str_to_vec(str2)[1])
-			if (str_to_vec(str1)[0] != str_to_vec(str2)[0])
-				return (str_to_vec(str1)[0] < str_to_vec(str2)[0]);
-			else
-			return (str_to_vec(str1)[2] < str_to_vec(str2)[2]);
-		return (str_to_vec(str1)[1] < str_to_vec(str2)[1]);
+		return a.name < b.name;
+	}
+	template<class of>
+	void push_to(of& of)
+	{
+		of << surname + ' ' + name + ' ' + date << endl;
 	}
 };
+
+full_name::full_name(string current_str)
+{
+	if (current_str != "")
+	{
+		size_t k = 0;
+		size_t i = 0;
+
+		while (current_str[i] != ' ')
+			++i;
+
+		surname = current_str.substr(k, i - k);
+		k = i + 1;
+		++i;
+		while (current_str[i] != ' ')
+			++i;
+
+		name = current_str.substr(k, i - k);
+		date = current_str.substr(i + 1, current_str.length() - i - 1);
+	}
+	else
+	{
+		surname = "";
+		name = "";
+		date = "";
+	}
+}
+
 class SortFile
 {
 public:
@@ -34,7 +67,7 @@ public:
 	auto file_size(string name_file)->size_t;
 	auto make_file(string name_file)->void;
 	auto sort()->void;
-	auto out_file(string line)->void;
+	auto out_file(full_name line)->void;
 	auto remove_temp_files()->void;
 	~SortFile();
 	auto division() -> void;
@@ -42,9 +75,10 @@ private:
 	fstream file, f;
 	size_t buffer, count_of_files, closed_files;
 	string s_out;
-	multiset<string, Compare> lines;
+	multiset<full_name> lines;
 	vector<string> file_names;
-	multimap<string, size_t, Compare> map;
+	multimap<full_name, size_t> map;
 };
+
 #include "SortFile.cpp"
 #endif
