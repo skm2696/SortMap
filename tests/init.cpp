@@ -6,7 +6,11 @@
 using namespace std;
 SCENARIO("sort", "[sort]")
 {
-  SortFile obj("sort.txt", 1, "fl.txt");
+  auto begin = std::chrono::high_resolution_clock::now();
+  SortFile obj("small.txt", 1, "fl.txt");
+  auto end = std::chrono::high_resolution_clock::now();
+	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+	std::cout << "8 mb time: " << res << std::endl;
 //ifstream file("sort_small.txt");
  // ifstream out("fl.txt");
  bool p=true;
