@@ -2,10 +2,9 @@
 #include <iostream>
 #include "SortFile.h"
 #include <stdexcept>
-#include <map> 
-#include <iterator>
 #ifndef SORT_CPP
 #define SORT_CPP
+
 auto str_to_vec(string str) -> vector<string>
 {
 	std::vector<string> buf;
@@ -66,11 +65,11 @@ SortFile::SortFile(string name_main_file, size_t buffer_, string name_out_file) 
 }
 auto SortFile::make_file(string name_file)->void
 {
-	file_names.push_back(name_file); 
+	file_names.push_back(name_file);
 	ofstream temp(name_file);
 	for (auto i : lines)
 	{
-		temp << i << endl;
+		i.push_to(temp);
 	}
 	temp.close();
 	lines.clear();
@@ -84,10 +83,10 @@ auto SortFile::file_size(string name_file)->size_t
 	temp.close();
 	return fsize;
 }
-auto SortFile::out_file(string line)->void
+auto SortFile::out_file(full_name line)->void
 {
 	ofstream file(s_out, ios::app);
-	file << line << endl;
+	line.push_to(file);
 	file.close();
 
 }
@@ -133,7 +132,7 @@ auto SortFile::sort()->void
 			closed_files++;
 			streams[n].close();
 			map.erase(map.begin());
-	
+
 		}
 	}
 
@@ -170,6 +169,7 @@ auto SortFile::division()->void
 
 	sort();
 };
+
 /*int main()
 {
 	new_file("names.txt", 120);
