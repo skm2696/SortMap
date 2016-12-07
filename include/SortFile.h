@@ -26,10 +26,10 @@ public:
 			return false;
 		return a.name < b.name;
 	}
-	template<class of>
-	void push_to(of& of)
+	
+	friend fstream & operator<< (ofstream &fout, full_name &a)
 	{
-		of << surname + ' ' + name + ' ' + date << endl;
+		fout << surname + ' ' + name + ' ' + date << endl;
 	}
 };
 
