@@ -19,8 +19,9 @@ inline auto SortFile::make_file(string name_file)->void {
 	file_names.push_back(name_file);
 	std::sort(line.begin(), line.end());
 	ofstream temp(name_file, ios::binary);
-	for (auto i : line)  
-		temp << i;
+	for (auto i : line) 
+		if(i.surname!="")
+			temp << i;
 	temp.close();
 	line.clear();
 }
