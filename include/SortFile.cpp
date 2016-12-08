@@ -41,17 +41,16 @@ inline auto SortFile::sort()->void
 	while (!map.empty())
 	{
 		auto it = map.begin();
-		int n = (*it).second;
 		f12<<((*it).first);
-		if (!streams[n].eof())
+		if (!streams[(*it).second].eof())
 		{
-			streams[n]>> person;
+			streams[(*it).second]>> person;
 			map.erase(map.begin());
 			map.insert(pair<full_name, size_t>(person, n));
 		}
 		else
 		{
-			streams[n].close();
+			streams[(*it).second].close();
 			map.erase(map.begin());
 
 		}
