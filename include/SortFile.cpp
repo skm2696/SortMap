@@ -57,10 +57,10 @@ inline auto SortFile::sort()->void
 		}
 	}
 
-	for (int i = 0; i < file_names.size(); ++i) 
+	/*for (int i = 0; i < file_names.size(); ++i) 
 	{
 		remove(file_names[i].c_str());
-	}
+	}*/
 
 }
 
