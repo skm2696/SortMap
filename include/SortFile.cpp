@@ -8,13 +8,10 @@
 
 using namespace std;
 
-inline SortFile::~SortFile() {
-	//file_names.clear();
-	//file_names.shrink_to_fit();
-	//pers.shrink_to_fit();
-}
+inline SortFile::~SortFile() {}
 
-inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_file) :s_in(name_main_file), s_out(out_file), count_of_files(0), buffer(buff_size * 1024 * 1024 * 0.9) {
+inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_file) :s_in(name_main_file), s_out(out_file), count_of_files(0), buffer(buff_size * 1024 * 1024 * 0.9) 
+{
 	line.reserve(buffer);
 	file_names.reserve(512);
 	division();
@@ -23,7 +20,7 @@ inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_fi
 inline auto SortFile::make_file(string name_file)->void 
 {
 	file_names.push_back(name_file);
-	std::sort(line.begin(), line.end()/*, [&](person &A, person &B) {return A.name < B.name;}*/);
+	std::sort(line.begin(), line.end());
 	ofstream temp(name_file, ios::binary);
 	for (auto i : line) 
 		if (i.surname != "") 
