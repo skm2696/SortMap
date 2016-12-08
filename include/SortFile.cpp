@@ -15,8 +15,7 @@ inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_fi
 	division();
 };
 
-inline auto SortFile::make_file(string name_file)->void 
-{
+inline auto SortFile::make_file(string name_file)->void {
 	file_names.push_back(name_file);
 	std::sort(line.begin(), line.end());
 	ofstream temp(name_file, ios::binary);
@@ -26,12 +25,10 @@ inline auto SortFile::make_file(string name_file)->void
 	line.clear();
 }
 
-inline auto SortFile::sort()->void 
-{
+inline auto SortFile::sort()->void {
 	ifstream *streams = new ifstream[count_of_files];
 	full_name person;
-	for (int i = 0; i < count_of_files; ++i)
-	{
+	for (int i = 0; i < count_of_files; ++i){
 		streams[i].open(file_names[i]);
 		streams[i] >> person;
 		map.insert(pair<full_name, size_t>(person, i));
@@ -43,8 +40,7 @@ inline auto SortFile::sort()->void
 		auto it = map.begin();
 		size_t n=(*it).second;
 		f12<<((*it).first);
-		if (!streams[n].eof())
-		{
+		if (!streams[n].eof()){
 			streams[n]>> person;
 			map.erase(map.begin());
 			map.insert(pair<full_name, size_t>(person, n));
@@ -57,8 +53,7 @@ inline auto SortFile::sort()->void
 		}
 	}
 
-	for (int i = 0; i < file_names.size(); ++i) 
-	{
+	for (int i = 0; i < file_names.size(); ++i) {
 		remove(file_names[i].c_str());
 	}
 
