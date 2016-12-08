@@ -49,7 +49,6 @@ public:
 	auto division()->void;
 	auto make_file(string name_file)->void;
 	auto sort()->void;
-	~SortFile();
 private:
 	string s_out, s_in;
 	size_t count_of_files;
