@@ -13,7 +13,6 @@ auto begin = std::chrono::high_resolution_clock::now();
  auto end = std::chrono::high_resolution_clock::now();
 	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
 	std::cout << "8 mb time: " << res << std::endl;
-	cout <<"32MB- " <<floor((end - start).count()) <<" seconds"<< endl;
  
   REQUIRE(p==true);
 }
