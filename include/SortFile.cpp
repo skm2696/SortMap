@@ -33,7 +33,7 @@ inline auto SortFile::sort()->void
 	for (int i = 0; i < count_of_files; ++i)
 	{
 		streams[i].open(file_names[i]);
-		*streams >> person;
+		streams[i] >> person;
 		map.insert(pair<full_name, size_t>(person, i));
 	}
 
