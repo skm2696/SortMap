@@ -8,10 +8,11 @@ using namespace std;
  
 SCENARIO("32mb", "[32mb]"){
  bool p=true;
-std::chrono::time_point<std::chrono::system_clock> start, end;
-	start = std::chrono::system_clock::now();
+auto begin = std::chrono::high_resolution_clock::now();
  SortFile obj("32.txt",17, "out");
- end = std::chrono::system_clock::now();
+ auto end = std::chrono::high_resolution_clock::now();
+	auto res = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+	std::cout << "8 mb time: " << res << std::endl;
 	cout <<"32MB- " <<floor((end - start).count()) <<" seconds"<< endl;
  
   REQUIRE(p==true);
