@@ -73,7 +73,7 @@ inline auto SortFile::division()->void {
 		}
 		else 
 		{
-			count_of_files++;
+			++count_of_files;
 			make_file(to_string(count_of_files));
 			line.push_back(person);
 			i = person.size();
@@ -81,7 +81,7 @@ inline auto SortFile::division()->void {
 	}
 	file.close();
 	if (!line.empty()) {
-		count_of_files++;
+		++count_of_files;
 		make_file(to_string(count_of_files));
 	}
 	sort();
