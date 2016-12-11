@@ -50,7 +50,6 @@ inline auto SortFile::sort()->void {
 		{
 			streams[n].close();
 			map.erase(map.begin());
-
 		}
 	}
 
@@ -88,21 +87,4 @@ inline auto SortFile::division()->void {
 	sort();
 }
 
-
-/*int main()
-{
-	new_file("names.txt", 120);
-	SortFile obj("names.txt");
-	const int N = 256;
-	char S[N] = { "" };
-	ifstream in1("abcd.txt"); 
-	while (!in1.eof()) 
-	{
-		in1.getline(S, N); 
-		cout << S << endl; 
-	}
-	in1.close();  
-	system("pause");
-	return 0;
-}*/
 #endif
