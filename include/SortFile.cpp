@@ -8,9 +8,9 @@
 
 using namespace std;
 
-inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_file) :s_in(name_main_file), s_out(out_file), count_of_files(0), buffer(buff_size * 1024 * 1024 * 0.9) 
+inline SortFile::SortFile(string name_main_file, size_t buff_size, string out_file) :s_in(name_main_file), s_out(out_file), count_of_files(0), buffer(buff_size * 1024 * 1024 * 0.33) 
 {
-	line.reserve(buffer);
+	line.reserve(buffer / sizeof(full_name));
 	file_names.reserve(512);
 	division();
 };
